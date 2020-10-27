@@ -1,3 +1,10 @@
 <p> Player 1: <%= @player1name %> </p>
 <p> Player 2: <%= @player2name %> </p>
 <p> Player 2 HP: <%= @player2hp %> </p>
+<form action="/play">
+  <input type="hidden" name="attacked" value="true">
+  <input type="submit" value="Attack">
+</form>
+<% if @attacked %>
+  <p>Player 2 was attacked</p>
+<% end %>

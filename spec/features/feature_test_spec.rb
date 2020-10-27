@@ -7,10 +7,7 @@ describe 'homepage', type: :feature do
   # end
 
   before(:each) do
-    visit '/'
-    fill_in('player1', with: 'Bob')
-    fill_in('player2', with: 'Bill')
-    click_button('Submit')
+    sign_in_and_play
   end
 
   it "takes two players names as inputs, then displays player1 name to the screen" do
@@ -23,5 +20,10 @@ describe 'homepage', type: :feature do
 
   it 'displays player2 hp to the screen' do
     expect(page).to have_content 'Player 2 HP: 60'
+  end
+
+  it 'allows player 1 to attack player 2, and receive confirmation' do
+    click_button('Attack')
+    expect(page).to have_content 'Player 2 was attacked'
   end
 end
