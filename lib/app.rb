@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require 'player'
+require './lib/player'
 
 class MyApp < Sinatra::Base
   enable :sessions
@@ -13,15 +13,18 @@ class MyApp < Sinatra::Base
     p params
     $player1 = Player.new(params['player1'])
     $player2 = Player.new(params['player2'])
-    session[:player2hp] = 60
     redirect to('/play')
   end
 
   get '/play' do
+    p $player1
     @player1name = $player1.name
     @player2name = $player2.name
-    @player2hp = session[:player2hp]
     @attacked = params[:attacked]
+    if @attacked
+      $player2.take_damage
+    end
+    @player2hp = $player2.hp
     erb(:play)
   end
 

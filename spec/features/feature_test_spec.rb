@@ -26,4 +26,9 @@ describe 'homepage', type: :feature do
     click_button('Attack')
     expect(page).to have_content 'Player 2 was attacked'
   end
+
+  it 'reduces player2 hp by 10 when attacked' do
+    click_button('Attack')
+    expect(page).to have_content 'Player 2 HP: 50'
+  end
 end
