@@ -6,11 +6,22 @@ describe 'homepage', type: :feature do
   #   expect(page).to have_content 'Testing infrastructure working!'
   # end
 
-  it "takes two players names as inputs, then displays them on the screen" do
+  before(:each) do
     visit '/'
     fill_in('player1', with: 'Bob')
     fill_in('player2', with: 'Bill')
     click_button('Submit')
-    expect(page).to have_content 'Player 1: Bob, Player 2: Bill'
+  end
+
+  it "takes two players names as inputs, then displays player1 name to the screen" do
+    expect(page).to have_content 'Player 1: Bob'
+  end
+
+  it "takes two players names as inputs, then displays player2 name to the screen" do
+    expect(page).to have_content 'Player 2: Bill'
+  end
+
+  it 'displays player2 hp to the screen' do
+    expect(page).to have_content 'Player 2 HP: 60'
   end
 end
